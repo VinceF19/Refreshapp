@@ -18,7 +18,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'try'),
+      home: const MyHomePage(
+        title: "",
+      ),
     );
   }
 }
@@ -40,9 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -51,77 +50,105 @@ class _MyHomePageState extends State<MyHomePage> {
               Stack(
                 children: [
                   Image.asset("../assets/hero.jpg", fit: BoxFit.fill),
-                  Column(
-                    children: [
-                      SizedBox(height: screenHeight * 0.2),
-                      const Text(
-                        "*END THE DEBATE*",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 70,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: screenHeight * 0.2),
+                        const Text(
+                          "*END THE DEBATE*",
+                          style: TextStyle(
+                            fontSize: 70,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: screenHeight * 0.1),
-                      const Text(
-                        'IKAW BAHALA',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 100,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white,
+                        SizedBox(height: screenHeight * 0.1),
+                        const Text(
+                          'IKAW BAHALA',
+                          style: TextStyle(
+                            fontSize: 100,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      const Text(
-                        "*2021*",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 60,
-                          color: Colors.white,
+                        const Text(
+                          "*2021*",
+                          style: TextStyle(
+                            fontSize: 60,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
               SizedBox(height: screenHeight * 0.1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Card(
-                    child: Column(
-                      children: [
-                        Text("Just Like Home But Better"),
-                        Text(
-                            "Bahala NA is the Restaurant to end all debates of where to dine and have a great time.")
-                      ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Card(
+                      child: Column(
+                        children: [
+                          Text(
+                            "Just Like Home But Better",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "Bahala NA is the Restaurant to end all debates of  \n where to dine and have a great time.",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 50),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 200,
-                          child: ListView.builder(
-                              itemCount: users.length,
-                              itemBuilder: (context, index) {
-                                final user = users[index];
-                                final email = user['email'];
-                                return Card(
-                                  child: ListTile(
-                                    title: Text(email),
-                                  ),
-                                );
-                              }),
-                        ),
-                        TextButton(
-                            onPressed: loadData, child: const Text("Load Data"))
-                      ],
-                    ),
-                  )
-                ],
+                    const SizedBox(width: 50),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: screenHeight,
+                            width: screenWidth * .75,
+                            child: Expanded(
+                              child: ListView.builder(
+                                  itemCount: users.length,
+                                  itemBuilder: (context, index) {
+                                    final user = users[index];
+                                    final email = user['email'];
+                                    return Wrap(
+                                      direction: Axis.horizontal,
+                                      children: [
+                                        Card(
+                                            child: Column(
+                                          children: [
+                                            Image.asset('../assets/hero.jpg'),
+                                            Text(
+                                              email,
+                                            ),
+                                          ],
+                                        )),
+                                      ],
+                                    );
+                                  }),
+                            ),
+                          ),
+                          TextButton(
+                              onPressed: loadData,
+                              child: const Text("Load Data"))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               )
             ],
           ),
